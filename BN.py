@@ -25,10 +25,3 @@ class BayesNet():
         leaves = rev.get_all_roots()
         #construct the tree bottom up, we've already checked for no cycles
         return
-
-
-graph = Graph()
-bn = BayesNet(graph)
-for dist in bn.distributions:
-    print(bn.distributions[dist])
-print(len(bn.distributions['cond_likelihood']))
