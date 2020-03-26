@@ -14,15 +14,23 @@ def num_observed() ->int:
 def plus(x: float,y:float) ->float:
     return x+y
 
+def myreduce(fun, ls: List[float]) -> float:
+    if len(ls)==0:
+        return 0#todo doesn't it depend on the function?
+    elif len(ls)==1:
+        return ls[0]
+    else:
+        return reduce(fun, ls)
+
+
 def accumarray(subs: np.ndarray, vals: np.ndarray, fun) -> List[float]:
-    ret = [[] for _ in subs]
+    if subs.shape[-1] !=vals.shape[-1]:
+        raise ValueError
+    ret = [[] for _ in range(reduce(max, subs)+1)]
     for i in range(subs.shape[0]):
         subscript = subs[i]
         val = vals[i]
-        try:
-            ret[subscript].append(val)
-        except:
-            ret[subscript] = [val]
+        ret[subscript].append(val)
     for i, ls in enumerate(ret):
-        ret[i]=reduce(fun, ls)
+        ret[i]=myreduce(fun, ls)
     return ret

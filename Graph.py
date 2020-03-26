@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 class Graph():
     def __init__(self):
         self.vertices = ['z1', 'z2']
